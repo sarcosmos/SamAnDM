@@ -1,0 +1,6 @@
+@SamAnDMBackEnd_HostAddress = http://localhost:5168
+
+GET {{SamAnDMBackEnd_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
