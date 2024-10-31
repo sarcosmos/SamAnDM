@@ -21,7 +21,7 @@ namespace SamAnDMBackEnd.Controllers
         public async Task<IActionResult> Register([FromForm] UserRegisterDto userRegisterDto)
         {
             var result = await _authService.RegisterAsync(userRegisterDto);
-            return Ok(result);
+            return Ok(new { message = result });
         }
 
         [HttpPost("login")]
