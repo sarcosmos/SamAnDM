@@ -72,6 +72,11 @@ namespace SamAnDMBackEnd.Service
                 DocumentSize = documentUploadDto.DocumentFile.Length,
             };
 
+            // Obtener la extensión del archivo
+            var fileExtension = Path.GetExtension(documentUploadDto.DocumentFile.FileName);
+            document.TypeDocument = fileExtension;
+
+
             using (var memoryStream = new MemoryStream())
             {
                 await documentUploadDto.DocumentFile.CopyToAsync(memoryStream);
