@@ -1,4 +1,6 @@
-﻿namespace SamAnDMBackEnd.Model
+﻿using System.Text.Json.Serialization;
+
+namespace SamAnDMBackEnd.Model
 {
     public class Historics
     {
@@ -9,6 +11,7 @@
         public string Action { get; set; }
         public string ReferenceId { get; set; }
 
+        [JsonIgnore]
         public ICollection<DocumentsHistorics> DocumentsHistorics { get; set; } 
     }
 }

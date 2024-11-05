@@ -1,4 +1,6 @@
-﻿namespace SamAnDMBackEnd.Model
+﻿using System.Text.Json.Serialization;
+
+namespace SamAnDMBackEnd.Model
 {
     public class Documents
     {
@@ -13,6 +15,8 @@
         public bool IsDeleted { get; set; } = false;
 
         public ICollection<FamilyGroup> FamilyGroups { get; set; }
+
+        [JsonIgnore]
         public ICollection<DocumentsHistorics> DocumentsHistorics { get; set; }
     }
 }
