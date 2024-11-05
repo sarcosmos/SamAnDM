@@ -71,7 +71,8 @@ namespace SamAnDMBackEnd.Service
             var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, user.Name),
-            new Claim(ClaimTypes.Role, user.UserType.TypeName)
+            new Claim(ClaimTypes.Role, user.UserType.TypeName),
+            new Claim(JwtRegisteredClaimNames.Sub, user.UserId.ToString())
         };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

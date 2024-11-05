@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SamAnDMBackEnd.Attributes;
 using SamAnDMBackEnd.DTO;
 using SamAnDMBackEnd.Model;
 using SamAnDMBackEnd.Service;
@@ -7,6 +8,8 @@ using SamAnDMBackEnd.Service;
 namespace SamAnDMBackEnd.Controllers
 {
     [ApiController]
+    [Authorize]
+    [Permission("Documents")]
     [Route("api/[controller]")]
     public class DocumentsController : ControllerBase
     {
@@ -17,7 +20,6 @@ namespace SamAnDMBackEnd.Controllers
             _documentService = documentService;
         }
 
-        [Authorize(Roles = "Users,Admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Documents>>> GetAllDocuments()
         {
@@ -25,7 +27,7 @@ namespace SamAnDMBackEnd.Controllers
             return Ok(documents);
         }
 
-        [Authorize(Roles = "Users,Admin")]
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDocument(int id)
         {
@@ -35,7 +37,7 @@ namespace SamAnDMBackEnd.Controllers
             return File(document.DocumentContent, "application/octet-stream", document.DocumentName);
         }
 
-        [Authorize(Roles = "Users,Admin")]
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDocument(int id, [FromForm] DocumentsUploadDto documentUploadDto)
         {
@@ -43,7 +45,7 @@ namespace SamAnDMBackEnd.Controllers
             return Ok("Documento actualizado con éxito");
         }
 
-        [Authorize(Roles = "Users,Admin")]
+
         [HttpPost("upload")]
         public async Task<IActionResult> UploadDocuments([FromForm] DocumentsUploadDto documentsUploadDto)
         {
@@ -51,7 +53,7 @@ namespace SamAnDMBackEnd.Controllers
             return Ok("Documento subido con éxito");
         }
 
-        [Authorize(Roles = "Users,Admin")]
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDocument(int id)
         {

@@ -21,6 +21,8 @@ builder.Services.AddScoped<IDocumentService, DocumentService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IPasswordHasher<Users>, PasswordHasher<Users>>();
+builder.Services.AddScoped<IPermissionService, PermissionService>();
+builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
 
 // Configuración de CORS
 builder.Services.AddCors(options =>
@@ -33,6 +35,7 @@ builder.Services.AddCors(options =>
     });
 });
 
+// Configuración de Seguridad
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mi API", Version = "v1" });
