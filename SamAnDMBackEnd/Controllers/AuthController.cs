@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SamAnDMBackEnd.Attributes;
 using SamAnDMBackEnd.DTO;
 using SamAnDMBackEnd.Model;
 using SamAnDMBackEnd.Service;
 
 namespace SamAnDMBackEnd.Controllers
 {
+
     [ApiController]
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
@@ -31,7 +33,8 @@ namespace SamAnDMBackEnd.Controllers
             return Ok(new { Token = token });
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
+        [Permission("Auth")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Users>>> GetAllUsers()
         {
@@ -39,7 +42,8 @@ namespace SamAnDMBackEnd.Controllers
             return Ok(users);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
+        [Permission("Auth")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Users>> GetUsersById(int id)
         {
@@ -50,7 +54,8 @@ namespace SamAnDMBackEnd.Controllers
             return Ok(users);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
+        [Permission("Auth")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> SoftDeleteUser(int id)
         {
