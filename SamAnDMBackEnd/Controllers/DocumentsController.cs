@@ -41,6 +41,24 @@ namespace SamAnDMBackEnd.Controllers
             return File(document.DocumentContent, "application/octet-stream", document.DocumentName);
         }
 
+        [HttpGet("user")]
+        public async Task<ActionResult<IEnumerable<Documents>>> GetUserDocuments()
+        {
+            var userId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var documents = await _documentService.GetUserDocumentsAsync(userId);
+            return Ok(documents);
+        }
+
+        [HttpGet("user/{id}")]
+        public async Task<IActionResult> GetUserDocumentById(int id)
+        {
+            var userId = int.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var document = await _documentService.GetUserDocumentByIdAsync(id, userId);
+            if (document == null) return NotFound("Documento no encontrado o no pertenece al usuario.");
+
+            return File(document.DocumentContent, "application/octet-stream", document.DocumentName);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDocument(int id, [FromForm] DocumentsUpdateDto documentUpdateDto)
         {
