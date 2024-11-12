@@ -79,7 +79,7 @@ namespace SamAnDMBackEnd.Service
                 document.DocumentContent = memoryStream.ToArray();
             }
 
-            await _documentsRepository.UpdateDocumentsAsync(document);
+            await _documentsRepository.UploadDocumentsAsync(document);
 
             // Retorna el documento recién creado
             return document;

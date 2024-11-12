@@ -38,7 +38,8 @@ namespace SamAnDMBackEnd.Controllers
             var document = await _documentService.GetDocumentByIdAsync(id);
             if (document == null) return NotFound();
 
-            return File(document.DocumentContent, "application/octet-stream", document.DocumentName);
+            var fileName = $"{document.DocumentName}{document.TypeDocument}";
+            return File(document.DocumentContent, "application/octet-stream", fileName);
         }
 
         [HttpGet("user")]
@@ -56,7 +57,8 @@ namespace SamAnDMBackEnd.Controllers
             var document = await _documentService.GetUserDocumentByIdAsync(id, userId);
             if (document == null) return NotFound("Documento no encontrado o no pertenece al usuario.");
 
-            return File(document.DocumentContent, "application/octet-stream", document.DocumentName);
+            var fileName = $"{document.DocumentName}{document.TypeDocument}";
+            return File(document.DocumentContent, "application/octet-stream", fileName);
         }
 
         [HttpPut("{id}")]
