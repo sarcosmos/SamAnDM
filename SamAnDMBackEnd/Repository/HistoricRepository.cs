@@ -17,7 +17,7 @@ namespace SamAnDMBackEnd.Repository
         }
         public async Task AddAsync(Historics historic)
         {
-             _context.Historics.Add(historic);
+            _context.Historics.Add(historic);
             await _context.SaveChangesAsync();
         }
     }

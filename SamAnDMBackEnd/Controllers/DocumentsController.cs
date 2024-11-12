@@ -33,7 +33,6 @@ namespace SamAnDMBackEnd.Controllers
             return Ok(documents);
         }
 
-
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDocument(int id)
         {
@@ -43,12 +42,12 @@ namespace SamAnDMBackEnd.Controllers
             return File(document.DocumentContent, "application/octet-stream", document.DocumentName);
         }
 
-
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDocument(int id, [FromForm] DocumentsUploadDto documentUploadDto)
+        public async Task<IActionResult> UpdateDocument(int id, [FromForm] DocumentsUpdateDto documentUpdateDto)
         {
+        
             // Llamar a UpdateDocumentAsync y obtener el documento actualizado
-            var document = await _documentService.UpdateDocumentAsync(id, documentUploadDto);
+            var document = await _documentService.UpdateDocumentAsync(id, documentUpdateDto);
 
             if (document == null)
             {

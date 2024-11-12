@@ -26,20 +26,20 @@ builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
 builder.Services.AddScoped<IHistoricRepository, HistoricRepository>();
 builder.Services.AddScoped<IHistoricService, HistoricService>();
 builder.Services.AddScoped<IDocumentsHistoricRepository, DocumentsHistoricRepository>();
-builder.Services.AddHttpContextAccessor(); // Para el acceso al contexto HTTP
+builder.Services.AddHttpContextAccessor();
 
-// Configuraci髇 de CORS
+// Configuraci贸n de CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins("http://localhost:3000") // Direcci髇 del frontend de React
+        policy.WithOrigins("http://localhost:3000") // Direcci贸n del frontend de React
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
 });
 
-// Configuraci髇 de Seguridad
+// Configuraci贸n de Seguridad
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mi API", Version = "v1" });
@@ -112,7 +112,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Habilitar CORS antes de la autenticaci髇 y autorizaci髇
+// Habilitar CORS antes de la autenticaci贸n y autorizaci贸n
 app.UseCors("AllowReactApp");
 
 app.UseAuthentication();

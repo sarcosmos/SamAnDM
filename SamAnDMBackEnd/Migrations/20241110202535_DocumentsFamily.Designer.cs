@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SamAnDMBackEnd.Context;
 
@@ -11,9 +12,11 @@ using SamAnDMBackEnd.Context;
 namespace SamAnDMBackEnd.Migrations
 {
     [DbContext(typeof(DbContextDM))]
-    partial class DbContextDMModelSnapshot : ModelSnapshot
+    [Migration("20241110202535_DocumentsFamily")]
+    partial class DocumentsFamily
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,9 +53,6 @@ namespace SamAnDMBackEnd.Migrations
 
                     b.Property<bool>("IsProtected")
                         .HasColumnType("bit");
-
-                    b.Property<int>("OwnerUserId")
-                        .HasColumnType("int");
 
                     b.Property<string>("TypeDocument")
                         .IsRequired()

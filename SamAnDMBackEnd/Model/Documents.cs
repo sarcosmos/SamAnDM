@@ -5,8 +5,8 @@ namespace SamAnDMBackEnd.Model
     public class Documents
     {
         public int DocumentId { get; set; }
+        public int OwnerUserId { get; set; }
         public bool IsProtected { get; set; }
-        public bool IsShared { get; set; }
         public string Address { get; set; }
         public string TypeDocument { get; set; }
         public string DocumentName { get; set; }

@@ -44,7 +44,7 @@ namespace SamAnDMBackEnd.Service
                 Name = userRegisterDto.Name,
                 UserTypeId = userRegisterDto.UserTypeId,
                 Password = userRegisterDto.Password,
-                IsDeleted = userRegisterDto.IsDeleted,
+                IsDeleted = false,
             };
 
             user.Password = _passwordHasher.HashPassword(user, userRegisterDto.Password);
