@@ -23,6 +23,10 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IPasswordHasher<Users>, PasswordHasher<Users>>();
 builder.Services.AddScoped<IPermissionService, PermissionService>();
 builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
+builder.Services.AddScoped<IHistoricRepository, HistoricRepository>();
+builder.Services.AddScoped<IHistoricService, HistoricService>();
+builder.Services.AddScoped<IDocumentsHistoricRepository, DocumentsHistoricRepository>();
+builder.Services.AddHttpContextAccessor();
 
 // Configuración de CORS
 builder.Services.AddCors(options =>
