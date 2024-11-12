@@ -12,6 +12,9 @@ namespace SamAnDMBackEnd.Service
         Task<Documents> UploadDocumentsAsync(DocumentsUploadDto documentUploadDto);
         Task<Documents> UpdateDocumentAsync(int id, DocumentsUpdateDto documentUpdateDto);
         Task SoftDeleteDocumentAsync(int id);
+
+        Task<IEnumerable<Documents>> GetUserDocumentsAsync(int userId);
+        Task<Documents> GetUserDocumentByIdAsync(int id, int userId);
     }
     public class DocumentService : IDocumentService
     {
@@ -80,6 +83,16 @@ namespace SamAnDMBackEnd.Service
 
             // Retorna el documento recién creado
             return document;
+        }
+
+        public async Task<IEnumerable<Documents>> GetUserDocumentsAsync(int userId)
+        {
+            return await _documentsRepository.GetUserDocumentsAsync(userId);
+        }
+
+        public async Task<Documents> GetUserDocumentByIdAsync(int id, int userId)
+        {
+            return await _documentsRepository.GetUserDocumentByIdAsync(id, userId);
         }
     }
 }

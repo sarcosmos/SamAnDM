@@ -12,6 +12,8 @@ namespace SamAnDMBackEnd.Repository
         Task UploadDocumentsAsync(Documents documents);
         Task UpdateDocumentsAsync(Documents documents);
         Task SoftDeleteDocumentsAsync(int id);
+        Task<IEnumerable<Documents>> GetUserDocumentsAsync(int userId);
+        Task<Documents> GetUserDocumentByIdAsync(int id, int userId);
     }
     public class DocumentsRepository : IDocumentsRepository
     {
@@ -55,6 +57,19 @@ namespace SamAnDMBackEnd.Repository
         {
             await _context.Documents.AddAsync(documents);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Documents>> GetUserDocumentsAsync(int userId)
+        {
+            return await _context.Documents
+                .Where(d => d.OwnerUserId == userId && !d.IsDeleted)
+                .ToListAsync();
+        }
+
+        public async Task<Documents> GetUserDocumentByIdAsync(int id, int userId)
+        {
+            return await _context.Documents
+                .FirstOrDefaultAsync(d => d.DocumentId == id && d.OwnerUserId == userId && !d.IsDeleted);
         }
     }
 }
