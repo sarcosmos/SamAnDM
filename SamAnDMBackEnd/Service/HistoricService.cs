@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 using SamAnDMBackEnd.Model;
 using SamAnDMBackEnd.Repository;
 
@@ -43,5 +43,5 @@ namespace SamAnDMBackEnd.Service
             await _documentsHasHistoricRepository.AddAsync(documentsHasHistoric);
         }
     }
-
 }
+

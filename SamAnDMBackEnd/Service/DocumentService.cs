@@ -38,7 +38,7 @@ namespace SamAnDMBackEnd.Service
         {
            await _documentsRepository.SoftDeleteDocumentsAsync(id);
         }
-
+        
         public async Task<Documents> UpdateDocumentAsync(int id, DocumentsUpdateDto documentUpdateDto)
         {
             var document = await _documentsRepository.GetDocumentsByIdAsync(id);

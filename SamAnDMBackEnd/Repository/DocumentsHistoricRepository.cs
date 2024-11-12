@@ -23,5 +23,5 @@ namespace SamAnDMBackEnd.Repository
             await _context.SaveChangesAsync();
         }
     }
-
 }
+

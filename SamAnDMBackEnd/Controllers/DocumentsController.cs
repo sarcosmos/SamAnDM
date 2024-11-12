@@ -45,6 +45,7 @@ namespace SamAnDMBackEnd.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDocument(int id, [FromForm] DocumentsUpdateDto documentUpdateDto)
         {
+        
             // Llamar a UpdateDocumentAsync y obtener el documento actualizado
             var document = await _documentService.UpdateDocumentAsync(id, documentUpdateDto);
 
