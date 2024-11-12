@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SamAnDMBackEnd.Attributes;
 using SamAnDMBackEnd.DTO;
 using SamAnDMBackEnd.Model;
+using SamAnDMBackEnd.Repository;
 using SamAnDMBackEnd.Service;
 
 namespace SamAnDMBackEnd.Controllers
@@ -13,10 +14,12 @@ namespace SamAnDMBackEnd.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IUserRepository _userRepository;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IUserRepository userRepository)
         {
             _authService = authService;
+            _userRepository = userRepository;
         }
 
         [HttpPost("register")]
@@ -30,7 +33,11 @@ namespace SamAnDMBackEnd.Controllers
         public async Task<IActionResult> Login([FromForm] UserLoginDto userLoginDto)
         {
             var token = await _authService.LoginAsync(userLoginDto);
-            return Ok(new { Token = token });
+
+            // Obtener los detalles del usuario después de iniciar sesión
+            var user = await _userRepository.GetByEmailAsync(userLoginDto.Email);
+
+            return Ok(new { Token = token, UserName = user.Name });
         }
 
         [Authorize]
