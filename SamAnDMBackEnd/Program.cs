@@ -28,15 +28,16 @@ builder.Services.AddScoped<IHistoricService, HistoricService>();
 builder.Services.AddScoped<IDocumentsHistoricRepository, DocumentsHistoricRepository>();
 builder.Services.AddHttpContextAccessor();
 
-// Configuración de CORS
+// Configuracio CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowReactApp", policy =>
-    {
-        policy.WithOrigins("http://localhost:3000") // Dirección del frontend de React
-              .AllowAnyMethod()
-              .AllowAnyHeader();
-    });
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin() 
+                   .AllowAnyMethod()  
+                   .AllowAnyHeader(); 
+        });
 });
 
 // Configuración de Seguridad
@@ -104,7 +105,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.Environment.IsDevelopment();
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -113,7 +114,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // Habilitar CORS antes de la autenticación y autorización
-app.UseCors("AllowReactApp");
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthentication();
 
